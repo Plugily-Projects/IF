@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.4-R0.1-SNAPSHOT</version>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -71,6 +71,11 @@
             <artifactId>authlib</artifactId>
             <version>1.5.21</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cryptomorin</groupId>
+            <artifactId>XSeries</artifactId>
+            <version>7.9.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
