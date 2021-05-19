@@ -1,18 +1,18 @@
 package com.github.stefvanschie.inventoryframework.pane;
 
-import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
-import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
-import com.github.stefvanschie.inventoryframework.gui.GuiItem;
+import com.cryptomorin.xseries.XEnchantment;
 import com.github.stefvanschie.inventoryframework.exception.XMLLoadException;
 import com.github.stefvanschie.inventoryframework.exception.XMLReflectionException;
+import com.github.stefvanschie.inventoryframework.gui.GuiItem;
+import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
+import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
 import com.github.stefvanschie.inventoryframework.util.SkullUtil;
-import com.github.stefvanschie.inventoryframework.util.UUIDTagType;
+import com.github.stefvanschie.inventoryframework.util.UUIDMetaUtil;
 import com.github.stefvanschie.inventoryframework.util.XMLUtil;
 import com.google.common.primitives.Primitives;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -26,7 +26,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.lang.UnsupportedOperationException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -370,17 +369,17 @@ public abstract class Pane {
                                 if (!innerNode.getNodeName().equals("enchantment"))
                                     continue;
 
-                                Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(
-                                    innerElementChild.getAttribute("id").toUpperCase(Locale.getDefault())
-                                ));
+                                Optional<Enchantment> enchantment = XEnchantment.matchXEnchantment(
+                                    innerElementChild.getAttribute("id")
+                                ).map(XEnchantment::parseEnchantment);
 
-                                if (enchantment == null) {
+                                if (!enchantment.isPresent()) {
                                     throw new XMLLoadException("Enchantment cannot be found");
                                 }
 
                                 int level = Integer.parseInt(innerElementChild.getAttribute("level"));
 
-                                itemMeta.addEnchant(enchantment, level, true);
+                                itemMeta.addEnchant(enchantment.get(), level, true);
                                 itemStack.setItemMeta(itemMeta);
                                 break;
                         }
@@ -553,7 +552,7 @@ public abstract class Pane {
             return null;
         }
 
-        UUID uuid = meta.getPersistentDataContainer().get(GuiItem.KEY_UUID, UUIDTagType.INSTANCE);
+        UUID uuid = UUIDMetaUtil.getUUID(meta);
         if (uuid == null) {
             return null;
         }

@@ -1,34 +1,25 @@
 package com.github.stefvanschie.inventoryframework.gui;
 
-import com.github.stefvanschie.inventoryframework.util.UUIDTagType;
-import org.bukkit.NamespacedKey;
+import com.github.stefvanschie.inventoryframework.util.UUIDMetaUtil;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * An item for in an inventory
  */
 public class GuiItem {
-
-    /**
-     * The {@link NamespacedKey} that specifies the location of the (internal) {@link UUID} in {@link PersistentDataContainer}s.
-     * The {@link PersistentDataType} that should be used is {@link UUIDTagType}.
-     */
-    public static final NamespacedKey KEY_UUID = new NamespacedKey(JavaPlugin.getProvidingPlugin(GuiItem.class), "IF-uuid");
 
     /**
      * An action for the inventory
@@ -106,7 +97,7 @@ public class GuiItem {
             throw new IllegalArgumentException("item must be able to have ItemMeta (it mustn't be AIR)");
         }
 
-        meta.getPersistentDataContainer().set(KEY_UUID, UUIDTagType.INSTANCE, guiItem.uuid);
+        UUIDMetaUtil.put(meta, guiItem.uuid);
         guiItem.item.setItemMeta(meta);
 
         return guiItem;
@@ -144,7 +135,7 @@ public class GuiItem {
         ItemMeta meta = item.getItemMeta();
 
         if (meta != null) {
-            meta.getPersistentDataContainer().set(KEY_UUID, UUIDTagType.INSTANCE, uuid);
+            UUIDMetaUtil.put(meta, uuid);
             item.setItemMeta(meta);
         }
     }
