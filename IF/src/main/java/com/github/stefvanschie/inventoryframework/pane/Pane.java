@@ -1,6 +1,5 @@
 package com.github.stefvanschie.inventoryframework.pane;
 
-import com.cryptomorin.xseries.XEnchantment;
 import com.github.stefvanschie.inventoryframework.exception.XMLLoadException;
 import com.github.stefvanschie.inventoryframework.exception.XMLReflectionException;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
@@ -369,17 +368,17 @@ public abstract class Pane {
                                 if (!innerNode.getNodeName().equals("enchantment"))
                                     continue;
 
-                                Optional<Enchantment> enchantment = XEnchantment.matchXEnchantment(
-                                    innerElementChild.getAttribute("id")
-                                ).map(XEnchantment::parseEnchantment);
+                                Enchantment enchantment = Enchantment.getByName(
+                                    innerElementChild.getAttribute("id").toUpperCase(Locale.getDefault())
+                                );
 
-                                if (!enchantment.isPresent()) {
+                                if (enchantment == null) {
                                     throw new XMLLoadException("Enchantment cannot be found");
                                 }
 
                                 int level = Integer.parseInt(innerElementChild.getAttribute("level"));
 
-                                itemMeta.addEnchant(enchantment.get(), level, true);
+                                itemMeta.addEnchant(enchantment, level, true);
                                 itemStack.setItemMeta(itemMeta);
                                 break;
                         }
