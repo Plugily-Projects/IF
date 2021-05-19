@@ -1,16 +1,16 @@
 package com.github.stefvanschie.inventoryframework.pane.component.util;
 
-import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
+import com.cryptomorin.xseries.XMaterial;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
+import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
 import com.github.stefvanschie.inventoryframework.pane.Flippable;
 import com.github.stefvanschie.inventoryframework.pane.Orientable;
 import com.github.stefvanschie.inventoryframework.pane.OutlinePane;
 import com.github.stefvanschie.inventoryframework.pane.Pane;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -52,9 +52,9 @@ public abstract class VariableBar extends Pane implements Orientable, Flippable 
         this.fillPane = new OutlinePane(0, 0, length, height);
         this.backgroundPane = new OutlinePane(0, 0, length, height);
 
-        this.fillPane.addItem(new GuiItem(new ItemStack(Material.GREEN_STAINED_GLASS_PANE),
+        this.fillPane.addItem(new GuiItem(Objects.requireNonNull(XMaterial.GREEN_STAINED_GLASS_PANE.parseItem()),
             event -> event.setCancelled(true)));
-        this.backgroundPane.addItem(new GuiItem(new ItemStack(Material.RED_STAINED_GLASS_PANE),
+        this.backgroundPane.addItem(new GuiItem(Objects.requireNonNull(XMaterial.RED_STAINED_GLASS_PANE.parseItem()),
             event -> event.setCancelled(true)));
 
         this.fillPane.setRepeat(true);
