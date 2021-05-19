@@ -49,10 +49,27 @@ public final class Version {
     private final String rawVersion;
 
     /**
+     * parsed server version
+     */
+    private final int major;
+    private final int minor;
+    private final int micro;
+
+    /**
      * ctor.
      */
     private Version() {
         this.rawVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].substring(1);
+        final Matcher matcher = PATTERN.matcher(this.rawVersion);
+        if (matcher.matches()) {
+            this.major = Integer.parseInt(matcher.group("major"));
+            this.minor = Integer.parseInt(matcher.group("minor"));
+            this.micro = Integer.parseInt(matcher.group("micro"));
+        } else {
+            this.major = 0;
+            this.minor = 0;
+            this.micro = 0;
+        }
     }
 
     /**
@@ -61,7 +78,7 @@ public final class Version {
      * @return major part.
      */
     public int getMajor() {
-        return this.get("major");
+        return this.major;
     }
 
     /**
@@ -70,7 +87,7 @@ public final class Version {
      * @return micro part.
      */
     public int getMicro() {
-        return this.get("micro");
+        return this.micro;
     }
 
     /**
@@ -79,7 +96,7 @@ public final class Version {
      * @return minor part.
      */
     public int getMinor() {
-        return this.get("minor");
+        return this.minor;
     }
 
     /**
@@ -90,17 +107,5 @@ public final class Version {
     @NotNull
     public String getRawVersion() {
         return this.rawVersion;
-    }
-
-    /**
-     * gets the part from the given key.
-     *
-     * @param key the key to get.
-     *
-     * @return the part of the given key.
-     */
-    private int get(@NotNull final String key) {
-        final Matcher matcher = PATTERN.matcher(this.rawVersion);
-        return matcher.matches() ? Integer.parseInt(matcher.group(key)) : 0;
     }
 }
