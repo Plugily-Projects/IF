@@ -1,5 +1,6 @@
 package com.github.stefvanschie.inventoryframework.gui;
 
+import com.cryptomorin.xseries.XMaterial;
 import com.github.stefvanschie.inventoryframework.gui.type.*;
 import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
 import org.bukkit.Bukkit;
@@ -8,8 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.*;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.plugin.Plugin;
@@ -18,7 +19,9 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Listens to events for {@link Gui}s. Only one instance of this class gets constructed.
@@ -48,16 +51,17 @@ public class GuiListener implements Listener {
             return;
         }
 
-        InventoryView view = event.getView();
-        Inventory inventory = view.getInventory(event.getRawSlot());
-
-        if (inventory == null) {
+        if (event.getSlotType() == InventoryType.SlotType.OUTSIDE) {
             gui.callOnOutsideClick(event);
             return;
         }
 
+        InventoryView view = event.getView();
+        int rawSlot = event.getRawSlot();
+        int convertedSlot = view.convertSlot(rawSlot);
+
         gui.callOnGlobalClick(event);
-        if (inventory.equals(view.getTopInventory())) {
+        if (rawSlot == convertedSlot) {
             gui.callOnTopClick(event);
         } else {
             gui.callOnBottomClick(event);
@@ -191,19 +195,16 @@ public class GuiListener implements Listener {
      * @param event the event fired when an entity picks up an item
      * @since 0.6.1
      */
+    @SuppressWarnings("deprecation")
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onEntityPickupItem(@NotNull EntityPickupItemEvent event) {
-        if (!(event.getEntity() instanceof HumanEntity)) {
-            return;
-        }
-
-        Gui gui = getGui(((HumanEntity) event.getEntity()).getOpenInventory().getTopInventory());
+    public void onEntityPickupItem(@NotNull PlayerPickupItemEvent event) {
+        Gui gui = getGui(event.getPlayer().getOpenInventory().getTopInventory());
 
         if (gui == null || !gui.isPlayerInventoryUsed()) {
             return;
         }
 
-        int leftOver = gui.getHumanEntityCache().add((HumanEntity) event.getEntity(), event.getItem().getItemStack());
+        int leftOver = gui.getHumanEntityCache().add(event.getPlayer(), event.getItem().getItemStack());
 
         if (leftOver == 0) {
             event.getItem().remove();
@@ -239,11 +240,11 @@ public class GuiListener implements Listener {
             boolean top = false, bottom = false;
 
             for (int inventorySlot : event.getRawSlots()) {
-                Inventory inventory = view.getInventory(inventorySlot);
+                int convertedSlot = view.convertSlot(inventorySlot);
 
-                if (view.getTopInventory().equals(inventory)) {
+                if (inventorySlot == convertedSlot) {
                     top = true;
-                } else if (view.getBottomInventory().equals(inventory)) {
+                } else {
                     bottom = true;
                 }
 
@@ -262,21 +263,25 @@ public class GuiListener implements Listener {
                 gui.callOnBottomDrag(event);
             }
         } else {
-            int index = inventorySlots.toArray(new Integer[0])[0];
-            InventoryType.SlotType slotType = view.getSlotType(index);
+            if (XMaterial.getVersion() < 14) {
+                event.setCancelled(true);
+            } else {
+                int index = inventorySlots.toArray(new Integer[0])[0];
+                InventoryType.SlotType slotType = view.getSlotType(index);
 
-            boolean even = event.getType() == DragType.EVEN;
+                boolean even = event.getType() == DragType.EVEN;
 
-            ClickType clickType = even ? ClickType.LEFT : ClickType.RIGHT;
-            InventoryAction inventoryAction = even ? InventoryAction.PLACE_SOME : InventoryAction.PLACE_ONE;
+                ClickType clickType = even ? ClickType.LEFT : ClickType.RIGHT;
+                InventoryAction inventoryAction = even ? InventoryAction.PLACE_SOME : InventoryAction.PLACE_ONE;
 
-            //this is a fake click event, firing this may cause other plugins to function incorrectly, so keep it local
-            InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(view, slotType, index, clickType,
-                inventoryAction);
+                //this is a fake click event, firing this may cause other plugins to function incorrectly, so keep it local
+                InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(view, slotType, index, clickType,
+                    inventoryAction);
 
-            onInventoryClick(inventoryClickEvent);
+                onInventoryClick(inventoryClickEvent);
 
-            event.setCancelled(inventoryClickEvent.isCancelled());
+                event.setCancelled(inventoryClickEvent.isCancelled());
+            }
         }
     }
 
@@ -297,8 +302,10 @@ public class GuiListener implements Listener {
         HumanEntity humanEntity = event.getPlayer();
         PlayerInventory playerInventory = humanEntity.getInventory();
 
-        //due to a client issue off-hand items appear as ghost items, this updates the off-hand correctly client-side
-        playerInventory.setItemInOffHand(playerInventory.getItemInOffHand());
+        if (XMaterial.getVersion() >= 9) {
+            //due to a client issue off-hand items appear as ghost items, this updates the off-hand correctly client-side
+            playerInventory.setItemInOffHand(playerInventory.getItemInOffHand());
+        }
 
         if (gui.isUpdating()) {
             gui.getHumanEntityCache().restoreAndForget(humanEntity);
