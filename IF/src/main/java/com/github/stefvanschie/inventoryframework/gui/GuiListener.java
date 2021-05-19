@@ -263,25 +263,7 @@ public class GuiListener implements Listener {
                 gui.callOnBottomDrag(event);
             }
         } else {
-            if (XMaterial.getVersion() < 14) {
-                event.setCancelled(true);
-            } else {
-                int index = inventorySlots.toArray(new Integer[0])[0];
-                InventoryType.SlotType slotType = view.getSlotType(index);
-
-                boolean even = event.getType() == DragType.EVEN;
-
-                ClickType clickType = even ? ClickType.LEFT : ClickType.RIGHT;
-                InventoryAction inventoryAction = even ? InventoryAction.PLACE_SOME : InventoryAction.PLACE_ONE;
-
-                //this is a fake click event, firing this may cause other plugins to function incorrectly, so keep it local
-                InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(view, slotType, index, clickType,
-                    inventoryAction);
-
-                onInventoryClick(inventoryClickEvent);
-
-                event.setCancelled(inventoryClickEvent.isCancelled());
-            }
+            event.setCancelled(true);
         }
     }
 
