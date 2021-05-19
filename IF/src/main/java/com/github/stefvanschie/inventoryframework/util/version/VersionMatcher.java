@@ -2,7 +2,6 @@ package com.github.stefvanschie.inventoryframework.util.version;
 
 import com.github.stefvanschie.inventoryframework.abstraction.*;
 import com.github.stefvanschie.inventoryframework.exception.UnsupportedVersionException;
-import io.github.portlek.bukkitversion.BukkitVersion;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -25,9 +24,8 @@ public class VersionMatcher {
     @NotNull
     @Contract(pure = true)
     public static AnvilInventory newAnvilInventory(@NotNull InventoryHolder inventoryHolder) {
-        BukkitVersion version = Version.CURRENT;
-        int minor = version.getMinor();
-        int micro = version.getMicro();
+        int minor = Version.CURRENT.getMinor();
+        int micro = Version.CURRENT.getMicro();
         switch (minor) {
             case 14:
                 return new com.github.stefvanschie.inventoryframework.nms.v1_14_R1.AnvilInventoryImpl(inventoryHolder);
@@ -57,9 +55,8 @@ public class VersionMatcher {
     @NotNull
     @Contract(pure = true)
     public static BeaconInventory newBeaconInventory(@NotNull InventoryHolder inventoryHolder) {
-        BukkitVersion version = Version.CURRENT;
-        int minor = version.getMinor();
-        int micro = version.getMicro();
+        int minor = Version.CURRENT.getMinor();
+        int micro = Version.CURRENT.getMicro();
         switch (minor) {
             case 14:
                 return new com.github.stefvanschie.inventoryframework.nms.v1_14_R1.BeaconInventoryImpl(inventoryHolder);
@@ -89,9 +86,8 @@ public class VersionMatcher {
     @NotNull
     @Contract(pure = true)
     public static CartographyTableInventory newCartographyTableInventory(@NotNull InventoryHolder inventoryHolder) {
-        BukkitVersion version = Version.CURRENT;
-        int minor = version.getMinor();
-        int micro = version.getMicro();
+        int minor = Version.CURRENT.getMinor();
+        int micro = Version.CURRENT.getMicro();
         switch (minor) {
             case 14:
                 return new com.github.stefvanschie.inventoryframework.nms.v1_14_R1.CartographyTableInventoryImpl(inventoryHolder);
@@ -121,9 +117,8 @@ public class VersionMatcher {
     @NotNull
     @Contract(pure = true)
     public static EnchantingTableInventory newEnchantingTableInventory(@NotNull InventoryHolder inventoryHolder) {
-        BukkitVersion version = Version.CURRENT;
-        int minor = version.getMinor();
-        int micro = version.getMicro();
+        int minor = Version.CURRENT.getMinor();
+        int micro = Version.CURRENT.getMicro();
         switch (minor) {
             case 14:
                 return new com.github.stefvanschie.inventoryframework.nms.v1_14_R1.EnchantingTableInventoryImpl(inventoryHolder);
@@ -153,9 +148,8 @@ public class VersionMatcher {
     @NotNull
     @Contract(pure = true)
     public static GrindstoneInventory newGrindstoneInventory(@NotNull InventoryHolder inventoryHolder) {
-        BukkitVersion version = Version.CURRENT;
-        int minor = version.getMinor();
-        int micro = version.getMicro();
+        int minor = Version.CURRENT.getMinor();
+        int micro = Version.CURRENT.getMicro();
         switch (minor) {
             case 14:
                 return new com.github.stefvanschie.inventoryframework.nms.v1_14_R1.GrindstoneInventoryImpl(inventoryHolder);
@@ -187,9 +181,8 @@ public class VersionMatcher {
     @NotNull
     @Contract(pure = true)
     public static SmithingTableInventory newSmithingTableInventory(@NotNull InventoryHolder inventoryHolder) {
-        BukkitVersion version = Version.CURRENT;
-        int minor = version.getMinor();
-        int micro = version.getMicro();
+        int minor = Version.CURRENT.getMinor();
+        int micro = Version.CURRENT.getMicro();
         switch (minor) {
             case 16:
                 if (micro == 1) {
@@ -215,9 +208,8 @@ public class VersionMatcher {
     @NotNull
     @Contract(pure = true)
     public static StonecutterInventory newStonecutterInventory(@NotNull InventoryHolder inventoryHolder) {
-        BukkitVersion version = Version.CURRENT;
-        int minor = version.getMinor();
-        int micro = version.getMicro();
+        int minor = Version.CURRENT.getMinor();
+        int micro = Version.CURRENT.getMicro();
         switch (minor) {
             case 14:
                 return new com.github.stefvanschie.inventoryframework.nms.v1_14_R1.StonecutterInventoryImpl(inventoryHolder);

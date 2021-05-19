@@ -1,6 +1,5 @@
 package com.github.stefvanschie.inventoryframework.util;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import org.bukkit.inventory.ItemStack;
@@ -36,7 +35,7 @@ public final class SkullUtil {
      */
     @NotNull
     public static ItemStack getSkull(@NotNull String id) {
-        ItemStack item = XMaterial.PLAYER_HEAD.parseItem();
+        ItemStack item = ItemUtil.getPlayerHead();
         ItemMeta itemMeta = Objects.requireNonNull(Objects.requireNonNull(item).getItemMeta());
         setSkull(itemMeta, id);
         item.setItemMeta(itemMeta);

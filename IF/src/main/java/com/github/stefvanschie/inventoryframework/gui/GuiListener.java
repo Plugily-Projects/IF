@@ -1,8 +1,8 @@
 package com.github.stefvanschie.inventoryframework.gui;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.github.stefvanschie.inventoryframework.gui.type.*;
 import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
+import com.github.stefvanschie.inventoryframework.util.version.Version;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -283,7 +283,7 @@ public class GuiListener implements Listener {
         HumanEntity humanEntity = event.getPlayer();
         PlayerInventory playerInventory = humanEntity.getInventory();
 
-        if (XMaterial.getVersion() >= 9) {
+        if (Version.CURRENT.getMinor() >= 9) {
             //due to a client issue off-hand items appear as ghost items, this updates the off-hand correctly client-side
             playerInventory.setItemInOffHand(playerInventory.getItemInOffHand());
         }

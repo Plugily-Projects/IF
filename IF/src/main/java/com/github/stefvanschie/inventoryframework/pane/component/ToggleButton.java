@@ -1,19 +1,18 @@
 package com.github.stefvanschie.inventoryframework.pane.component;
 
-import com.cryptomorin.xseries.XMaterial;
 import com.github.stefvanschie.inventoryframework.exception.XMLLoadException;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
 import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
 import com.github.stefvanschie.inventoryframework.pane.OutlinePane;
 import com.github.stefvanschie.inventoryframework.pane.Pane;
+import com.github.stefvanschie.inventoryframework.util.ItemUtil;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Element;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -44,11 +43,11 @@ public class ToggleButton extends Pane {
         super(length, height);
 
         this.enabledPane = new OutlinePane(0, 0, length, height);
-        this.enabledPane.addItem(new GuiItem(Objects.requireNonNull(XMaterial.GREEN_STAINED_GLASS_PANE.parseItem())));
+        this.enabledPane.addItem(new GuiItem(ItemUtil.getGreenStainedGlassPane()));
         this.enabledPane.setRepeat(true);
 
         this.disabledPane = new OutlinePane(0, 0, length, height);
-        this.disabledPane.addItem(new GuiItem(Objects.requireNonNull(XMaterial.RED_STAINED_GLASS_PANE.parseItem())));
+        this.disabledPane.addItem(new GuiItem(ItemUtil.getRedStainedGlassPane()));
         this.disabledPane.setRepeat(true);
     }
 

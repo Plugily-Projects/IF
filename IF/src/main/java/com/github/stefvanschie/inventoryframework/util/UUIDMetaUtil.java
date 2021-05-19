@@ -9,6 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UUIDMetaUtil {
     private static final Map<ItemMeta, UUID> metaMap = new ConcurrentHashMap<>();
 
+    private UUIDMetaUtil() {
+    }
+
     public static void put(ItemMeta meta, UUID uuid) {
         metaMap.put(meta, uuid);
     }
