@@ -56,12 +56,11 @@ public class GuiListener implements Listener {
             return;
         }
 
-        InventoryView view = event.getView();
         int rawSlot = event.getRawSlot();
-        int convertedSlot = view.convertSlot(rawSlot);
+        int eventSlot = event.getSlot();
 
         gui.callOnGlobalClick(event);
-        if (rawSlot == convertedSlot) {
+        if (rawSlot == eventSlot) {
             gui.callOnTopClick(event);
         } else {
             gui.callOnBottomClick(event);
