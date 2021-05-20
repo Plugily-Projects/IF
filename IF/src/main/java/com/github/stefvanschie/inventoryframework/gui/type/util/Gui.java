@@ -2,11 +2,14 @@ package com.github.stefvanschie.inventoryframework.gui.type.util;
 
 import com.github.stefvanschie.inventoryframework.HumanEntityCache;
 import com.github.stefvanschie.inventoryframework.exception.XMLLoadException;
-import com.github.stefvanschie.inventoryframework.gui.GuiListener;
+import com.github.stefvanschie.inventoryframework.gui.listener.GuiListener;
+import com.github.stefvanschie.inventoryframework.gui.listener.NewPickupListener;
+import com.github.stefvanschie.inventoryframework.gui.listener.OldPickupListener;
 import com.github.stefvanschie.inventoryframework.gui.type.*;
 import com.github.stefvanschie.inventoryframework.pane.*;
 import com.github.stefvanschie.inventoryframework.pane.component.*;
 import com.github.stefvanschie.inventoryframework.util.XMLUtil;
+import com.github.stefvanschie.inventoryframework.util.version.Version;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
@@ -141,8 +144,13 @@ public abstract class Gui implements InventoryHolder {
      */
     public Gui() {
         if (!hasRegisteredListeners) {
-            Bukkit.getPluginManager().registerEvents(new GuiListener(),
-                    JavaPlugin.getProvidingPlugin(getClass()));
+            JavaPlugin plugin = JavaPlugin.getProvidingPlugin(getClass());
+            Bukkit.getPluginManager().registerEvents(new GuiListener(), plugin);
+            if (Version.CURRENT.getMinor() < 12) {
+                Bukkit.getPluginManager().registerEvents(new OldPickupListener(), plugin);
+            } else {
+                Bukkit.getPluginManager().registerEvents(new NewPickupListener(), plugin);
+            }
 
             hasRegisteredListeners = true;
         }
