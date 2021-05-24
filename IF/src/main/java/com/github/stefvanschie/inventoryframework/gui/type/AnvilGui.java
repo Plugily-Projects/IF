@@ -4,7 +4,6 @@ import com.github.stefvanschie.inventoryframework.abstraction.AnvilInventory;
 import com.github.stefvanschie.inventoryframework.exception.XMLLoadException;
 import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
 import com.github.stefvanschie.inventoryframework.gui.type.util.NamedGui;
-import com.github.stefvanschie.inventoryframework.util.version.Version;
 import com.github.stefvanschie.inventoryframework.util.version.VersionMatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
@@ -62,8 +61,7 @@ public class AnvilGui extends NamedGui {
      * An internal anvil inventory
      */
     @NotNull
-    private final AnvilInventory anvilInventory = VersionMatcher.newAnvilInventory(Version.getVersion(),
-        this);
+    private final AnvilInventory anvilInventory = VersionMatcher.newAnvilInventory(this);
 
     /**
      * Constructs a new anvil gui

@@ -4,7 +4,6 @@ import com.github.stefvanschie.inventoryframework.abstraction.EnchantingTableInv
 import com.github.stefvanschie.inventoryframework.exception.XMLLoadException;
 import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
 import com.github.stefvanschie.inventoryframework.gui.type.util.NamedGui;
-import com.github.stefvanschie.inventoryframework.util.version.Version;
 import com.github.stefvanschie.inventoryframework.util.version.VersionMatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
@@ -50,8 +49,7 @@ public class EnchantingTableGui extends NamedGui {
      * An internal enchanting table inventory
      */
     @NotNull
-    private final EnchantingTableInventory enchantingTableInventory = VersionMatcher.newEnchantingTableInventory(
-        Version.getVersion(), this);
+    private final EnchantingTableInventory enchantingTableInventory = VersionMatcher.newEnchantingTableInventory(this);
 
     /**
      * Constructs a new GUI

@@ -4,7 +4,6 @@ import com.github.stefvanschie.inventoryframework.abstraction.BeaconInventory;
 import com.github.stefvanschie.inventoryframework.exception.XMLLoadException;
 import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
 import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
-import com.github.stefvanschie.inventoryframework.util.version.Version;
 import com.github.stefvanschie.inventoryframework.util.version.VersionMatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
@@ -49,8 +48,7 @@ public class BeaconGui extends Gui {
      * An internal beacon inventory
      */
     @NotNull
-    private final BeaconInventory beaconInventory = VersionMatcher.newBeaconInventory(Version.getVersion(),
-        this);
+    private final BeaconInventory beaconInventory = VersionMatcher.newBeaconInventory(this);
 
     @Override
     public void show(@NotNull HumanEntity humanEntity) {

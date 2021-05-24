@@ -4,7 +4,6 @@ import com.github.stefvanschie.inventoryframework.abstraction.GrindstoneInventor
 import com.github.stefvanschie.inventoryframework.exception.XMLLoadException;
 import com.github.stefvanschie.inventoryframework.gui.InventoryComponent;
 import com.github.stefvanschie.inventoryframework.gui.type.util.NamedGui;
-import com.github.stefvanschie.inventoryframework.util.version.Version;
 import com.github.stefvanschie.inventoryframework.util.version.VersionMatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
@@ -56,8 +55,7 @@ public class GrindstoneGui extends NamedGui {
      * An internal grindstone inventory
      */
     @NotNull
-    private final GrindstoneInventory grindstoneInventory = VersionMatcher.newGrindstoneInventory(Version.getVersion(),
-        this);
+    private final GrindstoneInventory grindstoneInventory = VersionMatcher.newGrindstoneInventory(this);
 
     /**
      * Constructs a new GUI
