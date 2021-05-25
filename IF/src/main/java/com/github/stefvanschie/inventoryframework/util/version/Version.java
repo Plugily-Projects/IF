@@ -37,12 +37,6 @@ public final class Version {
     public static final Version CURRENT = new Version();
 
     /**
-     * pattern of the server text. the pattern looks like (major)_(minor)_R(micro).
-     */
-    @NotNull
-    private static final Pattern PATTERN = Pattern.compile("v?(?<major>[0-9]+)[._](?<minor>[0-9]+)(?:[._]R(?<micro>[0-9]+))?(?<sub>.*)");
-
-    /**
      * server version text.
      */
     @NotNull
@@ -60,7 +54,8 @@ public final class Version {
      */
     private Version() {
         this.rawVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].substring(1);
-        final Matcher matcher = PATTERN.matcher(this.rawVersion);
+        Pattern pattern = Pattern.compile("v?(?<major>[0-9]+)[._](?<minor>[0-9]+)(?:[._]R(?<micro>[0-9]+))?(?<sub>.*)");
+        Matcher matcher = pattern.matcher(this.rawVersion);
         if (matcher.matches()) {
             this.major = Integer.parseInt(matcher.group("major"));
             this.minor = Integer.parseInt(matcher.group("minor"));
