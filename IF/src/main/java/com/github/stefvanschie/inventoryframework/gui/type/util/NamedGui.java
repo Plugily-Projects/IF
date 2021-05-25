@@ -22,7 +22,6 @@ public abstract class NamedGui extends Gui {
      * @since 0.8.0
      */
     public NamedGui(@NotNull String title) {
-        super();
         this.title = title;
     }
 
