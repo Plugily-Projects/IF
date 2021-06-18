@@ -1,6 +1,13 @@
 # IF <a href="https://discord.gg/RXmy4HdR4x"><img align="right" src="https://img.shields.io/discord/780514939293925407" alt="Discord guild"></a>
 
-*This framework works for Minecraft versions 1.14-1.16*
+*This framework works for Minecraft versions 1.8.8-1.16*
+
+Original groupId **com.github.stefvanschie.inventoryframework**
+New groupId due to **avoiding conflicts plugily.projects.inventoryframework**
+_Huge thanks to https://github.com/stefvanschie/IF for creating the inventory framework_
+
+**Changes to original**:
+- Works with legacy versions
 
 An inventory framework for managing GUIs
 
@@ -12,7 +19,7 @@ Next to those panes, GUIs can also be created from XML files by simple loading t
 To add this project as a dependency to your pom.xml, add the following to your pom.xml:
 ```XML
 <dependency>
-    <groupId>com.github.stefvanschie.inventoryframework</groupId>
+    <groupId>plugily.projects.inventoryframework</groupId>
     <artifactId>IF</artifactId>
     <version>0.9.8</version>
 </dependency>
@@ -29,7 +36,7 @@ Now in order to shade the project into your project, add the following to your p
         <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
         <relocations>
             <relocation>
-                <pattern>com.github.stefvanschie.inventoryframework</pattern>
+                <pattern>plugily.projects.inventoryframework</pattern>
                 <shadedPattern>[YOUR PACKAGE].inventoryframework</shadedPattern>
             </relocation>
         </relocations>
@@ -50,7 +57,7 @@ Replace [YOUR PACKAGE] with the top-level package of your project.
 To add this project as a dependency for your Gradle project, make sure your `dependencies` section of your build.gradle looks like the following:
 ```Groovy
 dependencies {
-    compile 'com.github.stefvanschie.inventoryframework:IF:0.9.8'
+    compile 'plugily.projects.inventoryframework:IF:0.9.8'
     // ...
 }
 ```
@@ -68,14 +75,14 @@ apply plugin: 'com.github.johnrengelman.shadow'
 To relocate the project's classes to your own namespace, add the following, with [YOUR PACKAGE] being the top-level package of your project:
 ```Groovy
 shadowJar {
-    relocate 'com.github.stefvanschie.inventoryframework', '[YOUR PACKAGE].inventoryframework'
+    relocate 'plugily.projects.inventoryframework', '[YOUR PACKAGE].inventoryframework'
 }
 ```
 
 ## Building from source
 If you want to build this project from source, run the following from Git Bash:
 
-    git clone https://github.com/stefvanschie/IF.git
+    git clone https://github.com/Plugily-Projects/IF.git
     cd IF
     mvn clean package
 

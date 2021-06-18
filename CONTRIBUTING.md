@@ -26,7 +26,7 @@ Before you make a contribution, please make sure it follows these ground rules:
 ## First timers
 
 If you want to help with this project, but don't know where to start, take a look at the
-[currently opened issues](https://github.com/stefvanschie/IF/issues). There are always some people who could use your help.
+[currently opened issues](https://github.com/Plugily-Projects/IF/issues). There are always some people who could use your help.
 
 ## Getting started with pull requests
 

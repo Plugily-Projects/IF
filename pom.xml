@@ -21,14 +21,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <groupId>com.github.stefvanschie.inventoryframework</groupId>
+    <groupId>plugily.projects.inventoryframework</groupId>
     <artifactId>IF-parent</artifactId>
     <version>0.9.8</version>
     <packaging>pom</packaging>
 
     <name>IF</name>
     <description>An inventory framework for managing GUIs</description>
-    <url>https://github.com/stefvanschie/IF</url>
+    <url>https://github.com/Plugily-Projects/IF</url>
 
     <licenses>
         <license>
@@ -39,7 +39,7 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/stefvanschie/IF.git</url>
+        <url>https://github.com/Plugily-Projects/IF.git</url>
     </scm>
 
     <developers>

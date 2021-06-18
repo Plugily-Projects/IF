@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>IF-parent</artifactId>
-        <groupId>com.github.stefvanschie.inventoryframework</groupId>
+        <groupId>plugily.projects.inventoryframework</groupId>
         <version>0.9.8</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
@@ -24,7 +24,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <groupId>plugily.projects.inventoryframework</groupId>
             <artifactId>abstraction</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
