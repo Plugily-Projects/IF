@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>IF-parent</artifactId>
-        <groupId>com.github.stefvanschie.inventoryframework</groupId>
+        <groupId>plugily.projects.inventoryframework</groupId>
         <version>0.9.9</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -25,43 +25,43 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <groupId>plugily.projects.inventoryframework</groupId>
             <artifactId>abstraction</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <groupId>plugily.projects.inventoryframework</groupId>
             <artifactId>1_14_R1</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <groupId>plugily.projects.inventoryframework</groupId>
             <artifactId>1_15_R1</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <groupId>plugily.projects.inventoryframework</groupId>
             <artifactId>1_16_R1</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <groupId>plugily.projects.inventoryframework</groupId>
             <artifactId>1_16_R2</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <groupId>plugily.projects.inventoryframework</groupId>
             <artifactId>1_16_R3</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <groupId>plugily.projects.inventoryframework</groupId>
             <artifactId>1_17_R1</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
