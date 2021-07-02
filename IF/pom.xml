@@ -5,7 +5,7 @@
     <parent>
         <artifactId>IF-parent</artifactId>
         <groupId>com.github.stefvanschie.inventoryframework</groupId>
-        <version>0.9.8</version>
+        <version>0.9.9</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -57,6 +57,12 @@
         <dependency>
             <groupId>com.github.stefvanschie.inventoryframework</groupId>
             <artifactId>1_16_R3</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <artifactId>1_17_R1</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>

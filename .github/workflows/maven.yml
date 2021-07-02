@@ -16,17 +16,27 @@ jobs:
     runs-on: ubuntu-latest
     name: 'Build'
     steps:
-    - run: |
-        wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar -O BuildTools.jar
-        java -jar BuildTools.jar --rev 1.14.4
-        java -jar BuildTools.jar --rev 1.15.2
-        java -jar BuildTools.jar --rev 1.16.1
-        java -jar BuildTools.jar --rev 1.16.3
-        java -jar BuildTools.jar --rev 1.16.4
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
+    - name: Set up JDK 11
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
+        java-version: 11
+    - run: |
+        wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar -O BuildTools.jar
+        java -jar BuildTools.jar --rev 1.14.4 --disable-java-check
+        java -jar BuildTools.jar --rev 1.15.2 --disable-java-check
+        java -jar BuildTools.jar --rev 1.16.1 --disable-java-check
+        java -jar BuildTools.jar --rev 1.16.3 --disable-java-check
+        java -jar BuildTools.jar --rev 1.16.4 --disable-java-check
+      name: Run BuildTools 1.14 - 1.16
+    - name: Set up JDK 16
+      uses: actions/setup-java@v1
+      with:
+        java-version: 16
+    - run: |
+        wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar -O BuildTools.jar
+        java -jar BuildTools.jar --rev 1.17 --remapped --disable-java-check
+      name: Run BuildTools 1.17
+    - uses: actions/checkout@v2
+      name: Checkout code
     - name: Build with Maven
       run: mvn -B package --file pom.xml
