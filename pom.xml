@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <groupId>plugily.projects.inventoryframework</groupId>
+    <groupId>com.github.stefvanschie.inventoryframework</groupId>
     <artifactId>IF-parent</artifactId>
     <version>0.9.8</version>
     <packaging>pom</packaging>
